@@ -12,7 +12,7 @@ For more detailed instructions, read this [doc](https://drive.google.com/open?id
 ## Task List
 
 ### Login App
-- [ ] Facebook Login Setup
+- [x] Facebook Login Setup
 - [ ] Testing views for authentication
 
 ---
@@ -26,7 +26,7 @@ For more detailed instructions, read this [doc](https://drive.google.com/open?id
 ---
 
 ### Questions App
-- [ ] Create models
+- [x] Create models
 - [ ] Create views
 - [ ] Testing views
 - [ ] Create templates
