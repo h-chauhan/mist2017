@@ -3,18 +3,18 @@ from django.db import models
 # Create your models here.
 class Question(models.Model):
     level = models.IntegerField()
-    question_text = models.CharField(max_length=200)
-    image = models.ImageField()
-    html = models.TextField()
-    script = models.TextField()
-    video = models.FileField()
-    audio = models.FileField()
+    question_text = models.CharField(max_length=200, blank=True)
+    image = models.ImageField(blank=True)
+    html = models.TextField(blank=True)
+    script = models.TextField(blank=True)
+    video = models.FileField(blank=True)
+    audio = models.FileField(blank=True)
      
     def __str__(self):
         return self.question_text
 
-class Answers(models.Model):
+class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    ans_text = models.CharField(max_length=200)
+    ans = models.CharField(max_length=200)
     def __str__(self):
-        return self.ans_text
+        return self.ans
