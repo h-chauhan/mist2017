@@ -4,19 +4,19 @@
 <head> </head>
 
 <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script>
         window.fbAsyncInit = function () {
             FB.init({
-                appId: '1395586523786497'
-                , xfbml: true
-                , version: 'v2.8'
+                appId: '1395586523786497',
+                xfbml: true,
+                version: 'v2.8'
             });
             FB.getLoginStatus(function (response) {
                 if (response.status === 'connected') {
                     console.log('Logged in.');
                     console.log(response);
-                }
-                else {
+                } else {
                     console.log('Not logged in.');
                 }
             });
@@ -37,17 +37,20 @@
         function checkLoginState() {
             FB.getLoginStatus(function (response) {
                 if (response.status === 'connected') {
-                    console.log('Logged in.');
-                    console.log(response);
-                }
-                else {
+                    $.post("/rest-auth/facebook/", {
+                                "access_token": response.authResponse.accessToken
+                            }, function (data, status) {       
+                                console.log("Data: " + data + "\nStatus: " + status);   
+                            });
+                } else {
                     console.log('Not logged in.');
                 }
             });
         }
     </script>
     <div id="fb-root"></div>
-    <fb:login-button max-rows="1" size="large" show-faces="true" auto-logout-link="true" scope="public_profile,email,user_friends,publish_actions" onlogin="checkLoginState();"> </fb:login-button>
+    <fb:login-button max-rows="1" size="large" show-faces="true" auto-logout-link="true" scope="public_profile,email,user_friends,publish_actions"
+        onlogin="checkLoginState();"> </fb:login-button>
 </body>
 
 </html>
