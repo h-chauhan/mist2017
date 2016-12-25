@@ -14,8 +14,12 @@
             });
             FB.getLoginStatus(function (response) {
                 if (response.status === 'connected') {
-                    console.log('Logged in.');
-                    console.log(response);
+                    $.post("/rest-auth/facebook/", {
+                            "access_token": response.authResponse.accessToken
+                        }, function (data, status) {       
+                            console.log("Data: " + data.key + "\nStatus: " + status);   
+                        }
+                    );
                 } else {
                     console.log('Not logged in.');
                 }
@@ -38,10 +42,11 @@
             FB.getLoginStatus(function (response) {
                 if (response.status === 'connected') {
                     $.post("/rest-auth/facebook/", {
-                                "access_token": response.authResponse.accessToken
-                            }, function (data, status) {       
-                                console.log("Data: " + data + "\nStatus: " + status);   
-                            });
+                            "access_token": response.authResponse.accessToken
+                        }, function (data, status) {       
+                            console.log("Data: " + data + "\nStatus: " + status);   
+                        }
+                    );
                 } else {
                     console.log('Not logged in.');
                 }
