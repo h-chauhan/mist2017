@@ -7,17 +7,13 @@ import json
 # Create your views here.
 @csrf_exempt
 def createPlayer(request):
-    body = json.loads(request.body.decode("utf-8"))
     try:
-        body['fbid']
-        print(str(body['fbid']))
-        player = Player.objects.get(fbID=str(body['fbid']))
-        player.userToken = body['access_token']
+        player = Player.objects.get(fbID=request.POST.get('fbid'))
+        player.userToken = request.POST.get('access_token')
         player.save()
     except Player.DoesNotExist:
-        player = Player(name=body['name'], fbID=body['fbid'],
-                        userToken=body['access_token'], level=1,
-                        levelTime=timezone.now, startTime=timezone.now, user=request.user)
+        player = Player(name=request.POST.get('name'), fbID=request.POST.get('fbid'),
+                        userToken=request.POST.get('access_token'), level=1,
+                        levelTime=timezone.now(), startTime=timezone.now(), user=request.user)
         player.save()
-        print()
     return HttpResponse("Success")
