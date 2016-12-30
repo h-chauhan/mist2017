@@ -13,12 +13,12 @@ For more detailed instructions, read this [doc](https://drive.google.com/open?id
 
 ### Login App
 - [x] Facebook Login Setup
-- [ ] Testing views for authentication
+- [x] Testing views for authentication
 
 ---
 
 ### Player App
-- [ ] Create models
+- [x] Create models
 - [ ] Create views
 - [ ] Testing views
 - [ ] Create templates
