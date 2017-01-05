@@ -25,7 +25,7 @@ def getPlayer(request):
     return HttpResponse(s,content_type="application/json")
 
 def playerList(request):
-    player_list = Player.objects.all()
+    player_list = Player.objects.order_by('-level', 'levelTime', 'pk')
     paginator = Paginator(player_list, 25) # Show 25 player per page
 
     page = request.GET.get('page')
@@ -39,4 +39,8 @@ def playerList(request):
         player = paginator.page(paginator.num_pages)
 
     return render(request, 'list.html', {'players': player})
+
+def rank(player):
+    playerlist = Player.objects.filter(((Q(level__gt=player.level)) | (Q(level=player.level)) & Q(levelTime__lt=player.levelTime)))  
+    return len(playerlist + 1)
 
