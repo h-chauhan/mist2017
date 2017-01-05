@@ -19,7 +19,7 @@ For more detailed instructions, read this [doc](https://drive.google.com/open?id
 
 ### Player App
 - [x] Create models
-- [ ] Create views
+- [x] Create views
 - [ ] Testing views
 - [ ] Create templates
 
@@ -27,7 +27,7 @@ For more detailed instructions, read this [doc](https://drive.google.com/open?id
 
 ### Questions App
 - [x] Create models
-- [ ] Create views
+- [x] Create views
 - [ ] Testing views
 - [ ] Create templates
 
