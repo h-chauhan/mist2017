@@ -13,14 +13,14 @@ For more detailed instructions, read this [doc](https://drive.google.com/open?id
 
 ### Login App
 - [x] Facebook Login Setup
-- [x] Testing views for authentication
+- [ ] Testing views for authentication
 
 ---
 
 ### Player App
 - [x] Create models
 - [x] Create views
-- [ ] Testing views
+- [x] Testing views
 - [ ] Create templates
 
 ---
@@ -28,6 +28,6 @@ For more detailed instructions, read this [doc](https://drive.google.com/open?id
 ### Questions App
 - [x] Create models
 - [x] Create views
-- [ ] Testing views
+- [x] Testing views
 - [ ] Create templates
 
