@@ -53,7 +53,9 @@
                         }
                     );
                     $.post("/player/create/", {
-                        "userToken": response.authResponse.accessToken
+                        "access_token": response.authResponse.accessToken
+                    }, function(data, status) {
+                        console.log(status);
                     });
                 } else {
                     console.log('Not logged in.');
