@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
+from django.shortcuts import render, HttpResponseRedirect, get_object_or_404, HttpResponse
 from player.models import Player
 from question.models import Question, Answer
 from django.contrib.auth.decorators import login_required
@@ -20,17 +20,17 @@ def getQuestion(request, lvl):
         HttpResponseRedirect(reverse('question', args=(player.level)))
 
 @login_required
-def submitAnswer(request,lvl):
+def submitAnswer(request, lvl):
     ques = get_object_or_404(Question, level=lvl)
     player = get_object_or_404(Player, user=request.user)
     answers = Answer.objects.filter(question=ques)
     status = False 
 
     for answer in answers:
-        if answer.ans == lower(request.POST.get('answer')):
+        if answer.ans == request.POST.get('answer').lower():
             player.level += 1
             player.save()
             status = True
             break
 
-    return HttpResponse(status)           
+    return HttpResponse(str(status))           

@@ -4,4 +4,10 @@
 
 {{ question.question_text }}
 
+<form action="{% url 'answer' question.level %}" method="post">
+    {% csrf_token %}
+    Key: <input type="text" name="answer"/>
+    <input type="submit" value="Submit" />
+</form>
+
 </html>
