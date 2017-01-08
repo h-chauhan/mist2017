@@ -16,4 +16,4 @@ class Player(models.Model):
         return len(playerlist) + 1
 
     def __str__(self):
-        return self.name
+        return self.user.first_name
