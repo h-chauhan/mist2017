@@ -20,6 +20,11 @@
                             console.log("Data: " + data.key + "\nStatus: " + status);   
                         }
                     );
+                    $.post("/player/create/", {
+                        "access_token": response.authResponse.accessToken
+                    }, function(data, status) {
+                        console.log(status);
+                    });
                 } else {
                     console.log('Not logged in.');
                 }
@@ -47,13 +52,15 @@
                             console.log("Data: " + data + "\nStatus: " + status);   
                         }
                     );
+                    $.post("/player/create/", {
+                        "userToken": response.authResponse.accessToken
+                    });
                 } else {
                     console.log('Not logged in.');
                 }
             });
         }
     </script>
-    <div id="fb-root"></div>
     <fb:login-button max-rows="1" size="large" show-faces="true" auto-logout-link="true" scope="public_profile,email,user_friends,publish_actions"
         onlogin="checkLoginState();"> </fb:login-button>
 </body>

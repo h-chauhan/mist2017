@@ -9,12 +9,11 @@ import json
 @csrf_exempt
 def createPlayer(request):
     try:
-        player = Player.objects.get(fbID=request.POST.get('fbid'))
+        player = Player.objects.get(user=request.user)
         player.userToken = request.POST.get('access_token')
         player.save()
     except Player.DoesNotExist:
-        player = Player(name=request.POST.get('name'), fbID=request.POST.get('fbid'),
-                        userToken=request.POST.get('access_token'), level=1,
+        player = Player(userToken=request.POST.get('access_token'), level=1,
                         levelTime=timezone.now(), startTime=timezone.now(), user=request.user)
         player.save()
     return HttpResponse("Success")
@@ -39,8 +38,3 @@ def playerList(request):
         player = paginator.page(paginator.num_pages)
 
     return render(request, 'list.html', {'players': player})
-
-def rank(player):
-    playerlist = Player.objects.filter(((Q(level__gt=player.level)) | (Q(level=player.level)) & Q(levelTime__lt=player.levelTime)))  
-    return len(playerlist + 1)
-
