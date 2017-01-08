@@ -1,5 +1,5 @@
 <!-- DOCTYPE html -->
-{% for player in players %} {# Each "player" is a player model object. #} {{ player.full_name|upper }}<br /> ... {% endfor %}
+{% for player in players %} {{ player.user.first_name }}{% endfor %}
 
 <div class="pagination">
     <span class="step-links">

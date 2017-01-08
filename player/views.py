@@ -25,7 +25,7 @@ def getPlayer(request):
 
 def playerList(request):
     player_list = Player.objects.order_by('-level', 'levelTime', 'pk')
-    paginator = Paginator(player_list, 25) # Show 25 player per page
+    paginator = Paginator(player_list, 2) # Show 25 player per page
 
     page = request.GET.get('page')
     try:
@@ -37,4 +37,4 @@ def playerList(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         player = paginator.page(paginator.num_pages)
 
-    return render(request, 'list.html', {'players': player})
+    return render(request, 'player/list.html', {'players': player})
