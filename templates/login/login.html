@@ -6,32 +6,48 @@
 <body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script>
-        window.fbAsyncInit = function () {
+        window.fbAsyncInit = function() {
             FB.init({
                 appId: '1395586523786497',
                 xfbml: true,
                 version: 'v2.8'
             });
-            FB.getLoginStatus(function (response) {
+            FB.getLoginStatus(function(response) {
                 if (response.status === 'connected') {
                     $.post("/rest-auth/facebook/", {
-                            "access_token": response.authResponse.accessToken
-                        }, function (data, status) {       
-                            console.log("Data: " + data.key + "\nStatus: " + status);   
-                        }
-                    );
-                    $.post("/player/create/", {
                         "access_token": response.authResponse.accessToken
-                    }, function(data, status) {
-                        console.log(status);
+                    }, function(data, status) {       
+                        console.log("Data: " + data.key + "\nStatus: " + status);   
                     });
+                    // $.post("/player/create/", {
+                    //     "access_token": response.authResponse.accessToken
+                    // }, function(data, status) {
+                    //     console.log(status);
+                    // });
+                    { %
+                        if request.user.is_authenticated %
+                    }
+                    if (is_user_logged_in()) {
+                        $("#button").show();
+                        $("#fb:login-button").hide();
+                    } else {
+                        $("#fb:login-button").show();
+                        $("#button").hide();
+                    } {
+                        else
+                    }
+                    $("#fb:login-button").show();
+                    $("#button").hide();
+
+
+
                 } else {
                     console.log('Not logged in.');
                 }
             });
             FB.AppEvents.logPageView();
         };
-        (function (d, s, id) {
+        (function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) {
                 return;
@@ -44,14 +60,13 @@
     </script>
     <script>
         function checkLoginState() {
-            FB.getLoginStatus(function (response) {
+            FB.getLoginStatus(function(response) {
                 if (response.status === 'connected') {
                     $.post("/rest-auth/facebook/", {
-                            "access_token": response.authResponse.accessToken
-                        }, function (data, status) {       
-                            console.log("Data: " + data + "\nStatus: " + status);   
-                        }
-                    );
+                        "access_token": response.authResponse.accessToken
+                    }, function(data, status) {       
+                        console.log("Data: " + data + "\nStatus: " + status);   
+                    });
                     $.post("/player/create/", {
                         "access_token": response.authResponse.accessToken
                     }, function(data, status) {
@@ -63,8 +78,9 @@
             });
         }
     </script>
-    <fb:login-button max-rows="1" size="large" show-faces="true" auto-logout-link="true" scope="public_profile,email,user_friends,publish_actions"
-        onlogin="checkLoginState();"> </fb:login-button>
+    <fb:login-button max-rows="1" size="large" show-faces="true" auto-logout-link="true" scope="public_profile,email,user_friends,publish_actions" onlogin="checkLoginState();"> </fb:login-button>
+    <button type="button">
+            Play!</button>
 </body>
 
 </html>
