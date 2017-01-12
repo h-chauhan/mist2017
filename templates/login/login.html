@@ -12,39 +12,34 @@
                 xfbml: true,
                 version: 'v2.8'
             });
-            FB.getLoginStatus(function(response) {
-                if (response.status === 'connected') {
-                    $.post("/rest-auth/facebook/", {
-                        "access_token": response.authResponse.accessToken
-                    }, function(data, status) {       
-                        console.log("Data: " + data.key + "\nStatus: " + status);   
-                    });
-                    // $.post("/player/create/", {
-                    //     "access_token": response.authResponse.accessToken
-                    // }, function(data, status) {
-                    //     console.log(status);
-                    // });
-                    { %
-                        if request.user.is_authenticated %
-                    }
-                    if (is_user_logged_in()) {
-                        $("#button").show();
-                        $("#fb:login-button").hide();
+
+            {% if request.user.is_authenticated %}
+                FB.getLoginStatus(function(response) {
+                    if (response.status === 'connected') {
+                        $("#play-btn").show();
+                        $("#login-btn").hide();
                     } else {
-                        $("#fb:login-button").show();
-                        $("#button").hide();
-                    } {
-                        else
+                        $("#play-btn").hide();
+                        $("#login-btn").show();
                     }
-                    $("#fb:login-button").show();
-                    $("#button").hide();
+                });
+            {% else %}
+                FB.getLoginStatus(function(response) {
+                    if (response.status === 'connected') {
+                        $.post("/rest-auth/facebook/", {
+                            "access_token": response.authResponse.accessToken
+                        }, function(data, status) {       
+                            console.log("Data: " + data.key + "\nStatus: " + status);   
+                        });
+                        $("#play-btn").show();
+                        $("#login-btn").hide();
+                    } else {
+                        $("#play-btn").hide();
+                        $("#login-btn").show();
+                    }
+                });
+            {% endif %}
 
-
-
-                } else {
-                    console.log('Not logged in.');
-                }
-            });
             FB.AppEvents.logPageView();
         };
         (function(d, s, id) {
@@ -60,27 +55,40 @@
     </script>
     <script>
         function checkLoginState() {
-            FB.getLoginStatus(function(response) {
-                if (response.status === 'connected') {
-                    $.post("/rest-auth/facebook/", {
-                        "access_token": response.authResponse.accessToken
-                    }, function(data, status) {       
-                        console.log("Data: " + data + "\nStatus: " + status);   
-                    });
-                    $.post("/player/create/", {
-                        "access_token": response.authResponse.accessToken
-                    }, function(data, status) {
-                        console.log(status);
-                    });
-                } else {
-                    console.log('Not logged in.');
-                }
-            });
+            {% if request.user.is_authenticated %}
+                FB.getLoginStatus(function(response) {
+                    if (response.status === 'connected') {
+                        $("#play-btn").show();
+                        $("#login-btn").hide();
+                    } else {
+                        $("#play-btn").hide();
+                        $("#login-btn").show();
+                        alert("Facebook Login Failed!");
+                    }
+                });
+            {% else %}
+                FB.getLoginStatus(function(response) {
+                    if (response.status === 'connected') {
+                        $.post("/rest-auth/facebook/", {
+                            "access_token": response.authResponse.accessToken
+                        }, function(data, status) {       
+                            console.log("Data: " + data.key + "\nStatus: " + status);   
+                        });
+                        $("#play-btn").show();
+                        $("#login-btn").hide();
+                    } else {
+                        $("#play-btn").hide();
+                        $("#login-btn").show();
+                        alert("Facebook Login Failed!");
+                    }
+                });
+            {% endif %}
         }
     </script>
-    <fb:login-button max-rows="1" size="large" show-faces="true" auto-logout-link="true" scope="public_profile,email,user_friends,publish_actions" onlogin="checkLoginState();"> </fb:login-button>
-    <button type="button">
-            Play!</button>
+    <fb:login-button id="login-btn" style="display: none;" max-rows="1" size="large" show-faces="true" 
+                auto-logout-link="false" scope="public_profile,user_friends,publish_actions" 
+                onlogin="checkLoginState();"> </fb:login-button>
+    <a href="{% url "create" %}" id="play-btn" style="display: none;">Play!</button>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponseRedirect, get_object_or_404, HttpResponse
+from django.shortcuts import render, HttpResponseRedirect, get_object_or_404, HttpResponse, reverse
 from player.models import Player
 from question.models import Question, Answer
 from django.contrib.auth.decorators import login_required
@@ -17,7 +17,7 @@ def getQuestion(request, lvl):
         }
         return render(request, "question/index.html", context)
     else:
-        HttpResponseRedirect(reverse('question', args=(player.level)))
+        return HttpResponseRedirect(reverse('question', args=(player.level,)))
 
 @login_required
 def submitAnswer(request, lvl):

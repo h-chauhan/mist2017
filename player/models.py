@@ -5,7 +5,6 @@ from django.db.models import Q
 # Create your models here.
 from django.utils import timezone
 class Player(models.Model):
-    userToken = models.CharField(max_length=200)
     level = models.IntegerField()
     levelTime = models.DateTimeField(default=timezone.now )
     startTime = models.DateTimeField(default=timezone.now)

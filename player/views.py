@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponseRedirect, HttpResponse, reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.csrf import csrf_exempt
 from player.models import Player
@@ -10,13 +10,10 @@ import json
 def createPlayer(request):
     try:
         player = Player.objects.get(user=request.user)
-        player.userToken = request.POST.get('access_token')
-        player.save()
     except Player.DoesNotExist:
-        player = Player(userToken=request.POST.get('access_token'), level=1,
-                        levelTime=timezone.now(), startTime=timezone.now(), user=request.user)
+        player = Player(level=1, levelTime=timezone.now(), startTime=timezone.now(), user=request.user)
         player.save()
-    return HttpResponse("Success")
+    return HttpResponseRedirect(reverse('question', args=(player.level,)))
 
 def getPlayer(request):
     player = get_object_or_404(Player, user=request.user)
