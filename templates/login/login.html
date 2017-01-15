@@ -1,94 +1,225 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
-
-<head> </head>
+<!--[if lt IE 9 ]><html class="ie ie-lt9 no-js" lang="en"><![endif]-->
+<!--[if IE 9 ]><html class="ie ie9 no-js" lang="en"><![endif]-->
+<!--[if gt IE 9 | !IE]><!-->
+<html class="no-js fixed" lang="en">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="This event invites scholarly individuals from all around the world to participate in the most spectacular quiz of the year. It is an online event and will be conducted through an online portal.">
+    <meta name="keywords" content="mist troika ieee dtu techfest treasure hunt game">
+    <meta name="author" content="ieeedtu">
+    <title>MIST</title>
+    <link rel='stylesheet' href='{% static "login/css/bootstrap.min.css" %}'>
+    <link rel='stylesheet' href='{% static "login/css/style.css" %}'>
+    <link rel='stylesheet' href='{% static "login/css/color.css" %}'>
+    <link rel="icon" href="assets/img/favicon.ico">
+ </head>
+    
 
 <body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+   <!-- loader -->
+    <div id="site-loader">
+        <div class="loader"></div>
+    </div>
+    <!-- loader -->
+    <!-- site wrap -->
+    <div id="site-wrap">
+        <!-- background -->
+        <div id="bg">
+            <div id="img"></div>
+            <div id="video"></div>
+            <div id="overlay"></div>
+            <div id="effect"> <img src='{% static "login/img/bg/cloud-01.png" %}' alt="" id="cloud1"> <img src='{% static "login/img/bg/cloud-02.png" %}'alt="" id="cloud2"> <img src='{% static "login/img/bg/cloud-03.png" %}'alt="" id="cloud3"> <img src='{% static "login/img/bg/cloud-04.png" %}'alt="" id="cloud4"> </div>
+            <canvas id="js-canvas"></canvas>
+        </div>
+        <!-- /background -->
+        <!-- site header -->
+        <header id="site-header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!-- header brand -->
+                        <div class="header-brand"> <img class="header-logo logo-dark" src='{% static "login/img/troikalogo.png" %}' alt="troika">
+                         </div>
+                        <!-- header brand -->
+                        <!-- header toggle-->
+                        <div class="header-toggle">
+                            <div id="menu-toggle" class="toggle"> <i class="ion-help"></i> </div>
+                        </div>
+                        <!-- /header toggle -->
+                    </div>
+                </div>
+            </div>
+
+        </header>
+        <!-- /site header -->
+        <!-- subscribe -->
+        <div id="form">
+            <div id="subscribe">
+                <div class="container" style="display: table-cell; vertical-align: middle">
+                     <h2 class="section-title">Instructions and Rules</h2>
+                     <ul style="color:whitesmoke;text-align: left">
+                         <li>Mist is an individual online event. You should possess a computing device with a fair internet connection to join the hunt.
+                         </li>
+                        <li>The event consists of a series of levels with visuals and texts which are riddles and you should solve them to advance to the next level.
+                        </li>
+                        <li>The answer should contain only alpha numeric symbols including space. For example, if the answer is “Noah’s Ark”, then you must enter “Noahs Ark” and that will be read as the correct answer.
+                        </li>
+                        <li>Clues will be given on timely basis by the organizers. They will be released through our Facebook page and also on the Forum.
+                        </li>
+                        <li>Any attempt to disclose the answers in public will lead to immediate disqualification of the participants.
+                        </li>
+                        <li>The organizers' decisions will be final and binding.
+                        </li>
+                        </ul>
+                   </div>
+            </div>
+        </div>
+        <!-- /subscribe --> 
+        
+        <!-- site main -->
+        <main id="site-main">
+            <!-- home -->
+            <section id="home">
+                <div class="section-wrap">
+                    <div class="section-cell">
+                        <div class="container">
+                            <!-- section header -->
+                            <div class="section-header row text-center">
+                                <div class="col-xs-12">
+                                    <p class="animation section-subtitle">Maths, Science, History Unravelling the MISTery</p>
+                                    <h1 class="section-title">MIST</h1>
+                                    <div class="animation section-divider"></div>
+                                </div>
+                            </div>
+                            <!-- /setion header -->
+                            <!-- section main -->
+                            <div class="section-main row">
+                                <div class="col-xs-12 text-center " >
+                                    <fb:login-button id="login-btn" style="display: none;" max-rows="1" size="large" show-faces="true" 
+                                                auto-logout-link="false" scope="public_profile,user_friends,publish_actions" 
+                                                onlogin="checkLoginState();"> </fb:login-button>
+                                    <a href="{% url "create" %}" id="play-btn" style="display: none; background-color: rgba(62, 68, 89, 0.99);color:whitesmoke" class="btn btn-lg" >Play!</a>
+                                </div>
+                            </div>
+                            <!-- /setion main -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /home -->
+        </main>
+        <!-- /site main -->
+        <!-- site footer -->
+        <footer id="site-footer">
+            <!-- footer social -->
+            <a href="#" id="volume"> <span></span> <span></span> <span></span> <span></span> </a>
+            <div id="footer-social"> 
+                <a href="#" title="" target="_blank"><i class="ion-ios-email"></i></a>
+                <a href="#" title="" target="_blank"><i class="ion-social-facebook"></i></a> </div>
+            <!-- /footer social -->
+        </footer>
+        <!-- /site footer -->
+        <!-- audio -->
+        <audio id="audio-player" loop>
+            <source src='{% static "login/audio/audio.mp3" %}' type="audio/mpeg"> </audio>
+        <!-- audio -->
+    </div>
+    <!-- /site wrap -->
+    <!-- script -->
+    <script src='{% static "login/js/vendor/jquery-2.1.4.min.js" %}'></script>
+    <!--[if lte IE 9]><!-->
+    <script src='{% static "login/js/vendor/html5shiv.min.js" %}'></script>
+    <!--<![endif]-->
+    <script src='{% static "login/js/vendor/bootstrap.min.js" %}'></script>
+    <script src='{% static "login/js/vendor/vendor.js" %}'></script>
+    <script src='{% static "login/js/variable.js" %}'></script>
+    <script src='{% static "login/js/main.js" %}'></script>
+    <!-- /script -->
     <script>
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId: '1395586523786497',
-                xfbml: true,
-                version: 'v2.8'
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId: '1395586523786497',
+            xfbml: true,
+            version: 'v2.8'
+        });
+
+        {% if request.user.is_authenticated %}
+            FB.getLoginStatus(function(response) {
+                if (response.status === 'connected') {
+                    $("#play-btn").show();
+                    $("#login-btn").hide();
+                } else {
+                    $("#play-btn").hide();
+                    $("#login-btn").show();
+                }
             });
+        {% else %}
+            FB.getLoginStatus(function(response) {
+                if (response.status === 'connected') {
+                    $.post("/rest-auth/facebook/", {
+                        "access_token": response.authResponse.accessToken
+                    }, function(data, status) {       
+                        console.log("Data: " + data.key + "\nStatus: " + status);   
+                    });
+                    $("#play-btn").show();
+                    $("#login-btn").hide();
+                } else {
+                    $("#play-btn").hide();
+                    $("#login-btn").show();
+                }
+            });
+        {% endif %}
 
-            {% if request.user.is_authenticated %}
-                FB.getLoginStatus(function(response) {
-                    if (response.status === 'connected') {
-                        $("#play-btn").show();
-                        $("#login-btn").hide();
-                    } else {
-                        $("#play-btn").hide();
-                        $("#login-btn").show();
-                    }
-                });
-            {% else %}
-                FB.getLoginStatus(function(response) {
-                    if (response.status === 'connected') {
-                        $.post("/rest-auth/facebook/", {
-                            "access_token": response.authResponse.accessToken
-                        }, function(data, status) {       
-                            console.log("Data: " + data.key + "\nStatus: " + status);   
-                        });
-                        $("#play-btn").show();
-                        $("#login-btn").hide();
-                    } else {
-                        $("#play-btn").hide();
-                        $("#login-btn").show();
-                    }
-                });
-            {% endif %}
-
-            FB.AppEvents.logPageView();
-        };
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {
-                return;
-            }
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
-    <script>
-        function checkLoginState() {
-            {% if request.user.is_authenticated %}
-                FB.getLoginStatus(function(response) {
-                    if (response.status === 'connected') {
-                        $("#play-btn").show();
-                        $("#login-btn").hide();
-                    } else {
-                        $("#play-btn").hide();
-                        $("#login-btn").show();
-                        alert("Facebook Login Failed!");
-                    }
-                });
-            {% else %}
-                FB.getLoginStatus(function(response) {
-                    if (response.status === 'connected') {
-                        $.post("/rest-auth/facebook/", {
-                            "access_token": response.authResponse.accessToken
-                        }, function(data, status) {       
-                            console.log("Data: " + data.key + "\nStatus: " + status);   
-                        });
-                        $("#play-btn").show();
-                        $("#login-btn").hide();
-                    } else {
-                        $("#play-btn").hide();
-                        $("#login-btn").show();
-                        alert("Facebook Login Failed!");
-                    }
-                });
-            {% endif %}
+        FB.AppEvents.logPageView();
+    };
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+            return;
         }
-    </script>
-    <fb:login-button id="login-btn" style="display: none;" max-rows="1" size="large" show-faces="true" 
-                auto-logout-link="false" scope="public_profile,user_friends,publish_actions" 
-                onlogin="checkLoginState();"> </fb:login-button>
-    <a href="{% url "create" %}" id="play-btn" style="display: none;">Play!</button>
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+<script>
+    function checkLoginState() {
+        {% if request.user.is_authenticated %}
+            FB.getLoginStatus(function(response) {
+                if (response.status === 'connected') {
+                    $("#play-btn").show();
+                    $("#login-btn").hide();
+                } else {
+                    $("#play-btn").hide();
+                    $("#login-btn").show();
+                    alert("Facebook Login Failed!");
+                }
+            });
+        {% else %}
+            FB.getLoginStatus(function(response) {
+                if (response.status === 'connected') {
+                    $.post("/rest-auth/facebook/", {
+                        "access_token": response.authResponse.accessToken
+                    }, function(data, status) {       
+                        console.log("Data: " + data.key + "\nStatus: " + status);   
+                    });
+                    $("#play-btn").show();
+                    $("#login-btn").hide();
+                } else {
+                    $("#play-btn").hide();
+                    $("#login-btn").show();
+                    alert("Facebook Login Failed!");
+                }
+            });
+        {% endif %}
+    }
+</script>
 </body>
 
 </html>

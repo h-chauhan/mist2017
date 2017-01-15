@@ -11,7 +11,3 @@ class FacebookLogin(SocialLoginView):
 
 def login(request):
     return render(request, 'login/login.html')
-
-@login_required
-def home(request):
-    return HttpResponse("Hello, logged in user!")

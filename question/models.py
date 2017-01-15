@@ -6,7 +6,7 @@ class Question(models.Model):
     question_text = models.CharField(max_length=200, blank=True)
     image = models.ImageField(blank=True)
     html = models.TextField(blank=True)
-    script = models.TextField(blank=True)
+    script = models.FileField(blank=True)
     video = models.FileField(blank=True)
     audio = models.FileField(blank=True)
      
