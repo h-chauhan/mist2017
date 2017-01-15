@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponseRedirect, get_object_or_404, Ht
 from player.models import Player
 from question.models import Question, Answer
 from django.contrib.auth.decorators import login_required
+from allauth.socialaccount.models import SocialAccount
 
 # Create your views here.
 @login_required
@@ -12,6 +13,7 @@ def getQuestion(request):
         'question': ques,
         'player': player,
         'rank': Player.rank(player),
+        'social_account': SocialAccount.objects.get(user=player.user)
     }
     return render(request, "question/index.html", context)
 

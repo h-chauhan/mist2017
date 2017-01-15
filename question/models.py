@@ -1,14 +1,19 @@
 from django.db import models
 
 # Create your models here.
+def upload_location(instance, filename):
+        return "%s/%s" % (instance.id, filename)
+
 class Question(models.Model):
     level = models.IntegerField()
     question_text = models.CharField(max_length=200, blank=True)
-    image = models.ImageField(blank=True)
+    image = models.ImageField(upload_to=upload_location, blank=True)
     html = models.TextField(blank=True)
     script = models.FileField(blank=True)
     video = models.FileField(blank=True)
     audio = models.FileField(blank=True)
+
+    
      
     def __str__(self):
         return self.question_text
@@ -18,3 +23,5 @@ class Answer(models.Model):
     ans = models.CharField(max_length=200)
     def __str__(self):
         return self.ans
+
+
