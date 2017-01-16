@@ -13,7 +13,7 @@ def createPlayer(request):
     except Player.DoesNotExist:
         player = Player(level=1, levelTime=timezone.now(), startTime=timezone.now(), user=request.user)
         player.save()
-    return HttpResponseRedirect(reverse('question', args=(player.level,)))
+    return HttpResponseRedirect(reverse('question'))
 
 def getPlayer(request):
     player = get_object_or_404(Player, user=request.user)

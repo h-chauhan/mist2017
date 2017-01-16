@@ -5,19 +5,15 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 @login_required
-def getQuestion(request, lvl):
+def getQuestion(request):
     player = get_object_or_404(Player, user=request.user)
-    ques = get_object_or_404(Question, level=lvl)
-
-    if int(lvl) <= player.level:
-        context = {
-            'question': ques,
-            'player': player,
-            'rank': Player.rank(player),
-        }
-        return render(request, "question/index.html", context)
-    else:
-        return HttpResponseRedirect(reverse('question', args=(player.level,)))
+    ques = get_object_or_404(Question, level=player.level)
+    context = {
+        'question': ques,
+        'player': player,
+        'rank': Player.rank(player),
+    }
+    return render(request, "question/index.html", context)
 
 @login_required
 def submitAnswer(request, lvl):
