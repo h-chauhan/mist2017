@@ -16,6 +16,8 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from login.views import FacebookLogin
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -24,3 +26,6 @@ urlpatterns = [
     url(r'^question/', include('question.urls')),
     url(r'^rest-auth/facebook/$', FacebookLogin.as_view(), name='fb_login')
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
