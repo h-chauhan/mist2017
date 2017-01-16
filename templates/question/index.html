@@ -4,6 +4,8 @@
 
 {{ question.question_text }}
 
+<img src="{{question.image.url}}">
+
 <form action="{% url 'answer' question.level %}" method="post">
     {% csrf_token %}
     Key: <input type="text" name="answer"/>
