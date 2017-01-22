@@ -40,13 +40,14 @@
             bottom:0;
             left:0;
             right:0;
-            {% comment %}height:6em;{% endcomment %}
+        
         }
         #answer-input {
             width:100%;
-
-
         }
+        
+ }
+
         .level-bg {
             background-image:url({% static "images/bg.jpg" %});
             background-repeat:no-repeat;
@@ -122,16 +123,16 @@
                 
             </div>
         </main>
-        <div class="mdl-layout__content mdl-color--red-100" id="answerwindow">
+        <div class="mdl-layout__content mdl-color--white" id="answerwindow">
             <form action="#" id="answer-form">
-                <div class="mdl-grid">
-                    <div class="mdl-cell--11-col mdl-grid">                    
+                <div class="mdl-grid" style="padding-top:0; padding-bottom:0;">
+                    <div class="mdl-cell--11-col mdl-grid mdl-cell--7-col-tablet mdl-cell--3-col-phone" style="padding-top:0; padding-bottom:0;">                    
                         <div class="mdl-textfield mdl-js-textfield" id="answer-input">
-                            <input class="mdl-textfield__input" type="text" id="key">
-                            <label class="mdl-textfield__label mdl-color-text--grey-600" for="key">Write the answer...</label>
+                            <input class="mdl-textfield__input" type="text" id="key" style="font-size:x-large">
+                            <label class="mdl-textfield__label mdl-color-text--grey-600" for="key" style="font-size:x-large; top:28px">Write the answer...</label>
                         </div>        
                     </div>
-                    <div class="mdl-cell mdl-cell--1-col">
+                    <div class="mdl-cell mdl-cell--1-col mdl-cell--1-col-tablet mdl-cell--1-col-phone" style="text-align:center">
                         <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-color--red-500">
                             <i class="material-icons" >send</i>
                         </button>
