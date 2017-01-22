@@ -46,20 +46,30 @@
                 <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
                     <h3> &nbsp; LEVEL {{question.level}}</h3> </div>
                 <div class="mdl-cell mdl-cell--8-col mdl-grid">
+                    {% if question.question_text %}
                     <div class="mdl-card__supporting-text mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col">
                         <h4> {{question.question_text}}</h4> </div>
+                        {% endif %}
+                        {% if question.html %}
                     <div class="mdl-card__supporting-text mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col"> {{question.html | safe}} </div>
+                    {% endif %}
+                    {% if question.image.url %}
                     <div class="mdl-card mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col">
                         <div class="mdl-card__media text-center"> <img src="{{question.image.url}}" style="max-width:100%;"> </div>
                     </div>
+                    {% endif %}
+                    {% if question.video.url %}
                     <div class="mdl-card__supporting-text mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col">
                         <video controls width=100%>
                             <source src="{{question.video.url}}" type="video/mp4"> Your browser does not support audio. </video>
                     </div>
+                    {% endif %}
+                    {% if question.audio.url}
                     <div class="mdl-card__supporting-text mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col">
                         <audio controls style="width:100%;">
                             <source src="{{question.audio.url}}" type="audio/mpeg"> Your browser does not support audio. </audio>
                     </div>
+                    {% endif %}
                 </div>
                 <div class="mdl-cell mdl-cell--4-col mdl-grid">
                     <div class="mdl-card mdl-color--red-500 mdl-shadow--2dp mdl-cell mdl-cell--12-col" style="height:200px;">
