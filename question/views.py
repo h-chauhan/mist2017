@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponseRedirect, get_object_or_404, Ht
 from player.models import Player
 from question.models import Question, Answer
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from allauth.socialaccount.models import SocialAccount
 
 # Create your views here.
@@ -18,9 +19,10 @@ def getQuestion(request):
     return render(request, "question/index.html", context)
 
 @login_required
-def submitAnswer(request, lvl):
-    ques = get_object_or_404(Question, level=lvl)
+@csrf_exempt
+def submitAnswer(request):
     player = get_object_or_404(Player, user=request.user)
+    ques = get_object_or_404(Question, level=player.level)
     answers = Answer.objects.filter(question=ques)
     status = False 
 
