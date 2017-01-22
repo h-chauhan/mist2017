@@ -1,0 +1,40 @@
+#view-source {
+    position: fixed;
+    display: block;
+    right: 0;
+    bottom: 0;
+    margin-right: 40px;
+    margin-bottom: 40px;
+    z-index: 900;
+}
+#questionwindow{
+    position:absolute;
+    top:4.0em;
+    bottom:5em;
+    overflow:auto;
+}
+#answerwindow{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+
+}
+#answer-input {
+    width:100%;
+}
+
+.level-bg {
+    background-image:url({% static "images/bg.jpg" %});
+    background-repeat:no-repeat;
+    background-size: cover;
+}
+
+.no-padding {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.text-center {
+    text-align: center;
+}

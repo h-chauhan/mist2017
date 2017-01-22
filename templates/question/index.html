@@ -19,46 +19,12 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.red-indigo.min.css">
     <link rel="stylesheet" href='{% static "styles.css" %}'>
-    <style>
-        #view-source {
-            position: fixed;
-            display: block;
-            right: 0;
-            bottom: 0;
-            margin-right: 40px;
-            margin-bottom: 40px;
-            z-index: 900;
-        }
-        #questionwindow{
-            position:absolute;
-            top:4em;
-            bottom:5em;
-            overflow:auto;
-        }
-        #answerwindow{
-            position:absolute;
-            bottom:0;
-            left:0;
-            right:0;
-        
-        }
-        #answer-input {
-            width:100%;
-        }
-        
- }
-
-        .level-bg {
-            background-image:url({% static "images/bg.jpg" %});
-            background-repeat:no-repeat;
-            background-size: cover;
-        }
-    </style>
+    <link rel="stylesheet" href='{% static "custom.css" %}'>
 </head>
 
 <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-        <header class="demo-header mdl-layout__header mdl-color--red-600 mdl-color-text--white">
+        <header class="demo-header mdl-layout__header mdl-color--red-800 mdl-color-text--white">
             <div class="mdl-layout__header-row">
                 <span class="mdl-layout-title">MIST</span>
                 <div class="mdl-layout-spacer"></div>
@@ -71,7 +37,7 @@
                 </ul>
             </div>
         </header>
-        <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+        <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--white">
             <header class="demo-drawer-header">
                 <img src="http://graph.facebook.com/{{social_account.uid}}/picture?height=100" class="demo-avatar">
                 <div class="demo-avatar-dropdown">
@@ -87,7 +53,7 @@
         <main class="mdl-layout__content mdl-color--grey-300" id="questionwindow">
             <div class="mdl-grid">
                 <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
-                    <h2> &nbsp; LEVEL {{question.level}}</h2>
+                    <h3> &nbsp; LEVEL {{question.level}}</h3>
                 </div>
                 <div class="mdl-cell mdl-cell--8-col mdl-grid">
                     <div class="mdl-card__supporting-text mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col">
@@ -97,8 +63,8 @@
                         {{question.html | safe}}
                     </div>
                     <div class="mdl-card mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col">
-                        <div class="mdl-card__media">
-                            <img src="{{question.image.url}}" width=100%>
+                        <div class="mdl-card__media text-center">
+                            <img src="{{question.image.url}}" style="max-width:100%;">
                         </div>
                     </div>
                     <div class="mdl-card__supporting-text mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col">
@@ -113,10 +79,10 @@
                     </div>
                 </div>
                 <div class="mdl-cell mdl-cell--4-col mdl-grid">
-                    <div class="mdl-card mdl-color--grey-600 mdl-shadow--2dp mdl-cell mdl-cell--12-col" style="height:200px;">
-                        <div class="mdl-card__supporting-text" style="color:white; ">
-                            <h4 style="text-align:center"><i class="material-icons">star</i> Your current rank <i class="material-icons">star</i></h4>
-                            <h1 style="text-align:center">{{rank}}</h1>
+                    <div class="mdl-card mdl-color--red-500 mdl-shadow--2dp mdl-cell mdl-cell--12-col" style="height:200px;">
+                        <div class="mdl-card__supporting-text mdl-color-text--white">
+                            <h4 class="text-center"><i class="material-icons">star</i> Your current rank <i class="material-icons">star</i></h4>
+                            <h1 class="text-center">{{rank}}</h1>
                         </div>
                     </div>
                 </div>
@@ -124,15 +90,15 @@
             </div>
         </main>
         <div class="mdl-layout__content mdl-color--white" id="answerwindow">
-            <form action="#" id="answer-form">
-                <div class="mdl-grid" style="padding-top:0; padding-bottom:0;">
-                    <div class="mdl-cell--11-col mdl-grid mdl-cell--7-col-tablet mdl-cell--3-col-phone" style="padding-top:0; padding-bottom:0;">                    
+            <form method="POST" id="answer-form">
+                <div class="mdl-grid no-padding">
+                    <div class="mdl-cell--11-col mdl-grid mdl-cell--7-col-tablet mdl-cell--3-col-phone no-padding">                    
                         <div class="mdl-textfield mdl-js-textfield" id="answer-input">
                             <input class="mdl-textfield__input" type="text" id="key" style="font-size:large">
                             <label class="mdl-textfield__label mdl-color-text--grey-600" for="key" style="font-size:large;">Write the answer...</label>
                         </div>        
                     </div>
-                    <div class="mdl-cell mdl-cell--1-col mdl-cell--1-col-tablet mdl-cell--1-col-phone" style="text-align:center">
+                    <div class="mdl-cell mdl-cell--1-col mdl-cell--1-col-tablet mdl-cell--1-col-phone text-center">
                         <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-color--red-500">
                             <i class="material-icons" >send</i>
                         </button>
