@@ -19,7 +19,20 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.red-indigo.min.css">
     <link rel="stylesheet" href='{% static "styles.css" %}'>
-    <link rel="stylesheet" href='{% static "custom.css" %}'> </head>
+    <link rel="stylesheet" href='{% static "custom.css" %}'> 
+
+    <style>
+        table {
+            width: 100%;
+        }
+        @media screen and (max-width: 767px) {
+            table {
+                display: block;
+                overflow-x: scroll;
+            }
+        }
+    </style>    
+</head>
 
 <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
@@ -50,21 +63,61 @@
                     <h3> &nbsp; Leaderboard</h3>
                 </div>
                 <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
-                    <h4> &nbsp; Your Current Rank</h4>
+                    <h4> &nbsp; Your Current Rank: {{ rank }}</h4>
                 </div>
-                {% for entry in leaderboard %} {{ entry.player.user.first_name }}{% endfor %}
 
-                <div class="pagination">
-                    <span class="step-links">
-                        {% if players.has_previous %}
-                            <a href="?page={{ players.previous_page_number }}">previous</a>
-                        {% endif %}
+                <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+                    <table class="mdl-data-table mdl-js-data-table">
+                        <thead>
+                            <tr>
+                            <th>Rank</th>
+                            <th class="mdl-data-table__cell--non-numeric">Avatar</th>
+                            <th class="mdl-data-table__cell--non-numeric">Name</th>
+                            <th>Level</th>
+                            <th class="mdl-data-table__cell--non-numeric">Level Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for entry in leaderboard %} 
+                            <tr>
+                            <td>{{ entry.rank }}</td>
+                            <td class="mdl-data-table__cell--non-numeric"><img src="http://graph.facebook.com/{{ entry.social_account.uid}}/picture?height=100" class="demo-avatar"></td>
+                            <td class="mdl-data-table__cell--non-numeric">{{ entry.player.user.first_name }} {{ entry.player.user.last_name }}</td>
+                            <td>{{ entry.player.level }}</td>
+                            <td class="mdl-data-table__cell--non-numeric">{{ entry.player.levelTime }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        </table>
+                </div>
+                
+                <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+                    <div class="pagination">
+                        <span class="step-links">
+                            {% if player_list.has_previous %}
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="location.href='?page=1';">
+                                    <i class="material-icons">first_page</i>
+                                </button>
+                                &nbsp;
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="location.href='?page={{ player_list.prev_page_number }}';">
+                                    <i class="material-icons">chevron_left</i>
+                                </button>
+                            {% endif %}
 
-                        <span class="current">
-                            Page {{ players.number }} of {{ players.paginator.num_pages }}.
-                        </span> {% if players.has_next %}
-                    <a href="?page={{ players.next_page_number }}">next</a> {% endif %}
-                    </span>
+                            <span class="current">
+                                Page {{ player_list.number }} of {{ player_list.paginator.num_pages }}.
+                            </span> 
+                            {% if player_list.has_next %}
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="location.href='?page={{ player_list.next_page_number }}';">
+                                    <i class="material-icons">chevron_right</i>
+                                </button>       
+                                &nbsp;                                
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="location.href='?page={{ player_list.paginator.num_pages }}';">
+                                    <i class="material-icons">last_page</i>
+                                </button>
+                            {% endif %}
+                        </span>
+                    </div>
                 </div>
             </div>
         </main>
