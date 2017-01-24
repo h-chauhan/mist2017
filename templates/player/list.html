@@ -1,19 +1,4 @@
-<!-- DOCTYPE html -->
-<!--{% for player in players %} {{ player.user.first_name }}{% endfor %}
-
-<div class="pagination">
-    <span class="step-links">
-        {% if players.has_previous %}
-            <a href="?page={{ players.previous_page_number }}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ players.number }} of {{ players.paginator.num_pages }}.
-        </span> {% if players.has_next %}
-    <a href="?page={{ players.next_page_number }}">next</a> {% endif %}
-    </span>
-</div>-->
-
+<!DOCTYPE html>
 {% load static %}
 <!DOCTYPE html>
 <!--[if lt IE 9 ]><html class="ie ie-lt9 no-js" lang="en"><![endif]-->
@@ -66,6 +51,20 @@
                 </div>
                 <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
                     <h4> &nbsp; Your Current Rank</h4>
+                </div>
+                {% for entry in leaderboard %} {{ entry.player.user.first_name }}{% endfor %}
+
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if players.has_previous %}
+                            <a href="?page={{ players.previous_page_number }}">previous</a>
+                        {% endif %}
+
+                        <span class="current">
+                            Page {{ players.number }} of {{ players.paginator.num_pages }}.
+                        </span> {% if players.has_next %}
+                    <a href="?page={{ players.next_page_number }}">next</a> {% endif %}
+                    </span>
                 </div>
             </div>
         </main>
