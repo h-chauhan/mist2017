@@ -39,7 +39,9 @@
                     <div class="mdl-layout-spacer"></div>
                 </div>
             </header>
-            <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800"> <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a> <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">format_list_numbered</i>Leaderboard</a> </nav>
+            <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800"> 
+                <a class="mdl-navigation__link active" href="{% url "question" %}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">dashboard</i>Dashboard</a> 
+                <a class="mdl-navigation__link" href="{% url "leaderboard" %}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">format_list_numbered</i>Leaderboard</a> </nav>
         </div>
         <main class="mdl-layout__content mdl-color--grey-300" id="questionwindow">
             <div class="mdl-grid">
