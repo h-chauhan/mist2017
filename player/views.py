@@ -41,12 +41,23 @@ def playerList(request):
             'rank': p.rank()
         })
 
+    if player_list.paginator.num_pages <= 5:
+        r = player_list.paginator.page_range
+    else:
+        if player_list.number <= 2:
+            r = range(1,6)
+        elif player_list.number <= player_list.paginator.num_pages - 2:
+            r = range(player_list.number-2, player_list.number+3)
+        else:
+            r = range(player_list.number-4, player_list.number+1)
+
     context = {
         'player': player,
         'social_account': SocialAccount.objects.get(user=player.user),
         'leaderboard': leaderboard,
         'rank': player.rank(),
-        'player_list': player_list
+        'player_list': player_list,
+        'range': r
     }
 
     return render(request, 'player/list.html', context)
