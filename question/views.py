@@ -4,6 +4,7 @@ from question.models import Question, Answer
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from allauth.socialaccount.models import SocialAccount
+from django.utils import timezone
 
 # Create your views here.
 @login_required
@@ -29,6 +30,7 @@ def submitAnswer(request):
     for answer in answers:
         if answer.ans == request.POST.get('answer').lower():
             player.level += 1
+            player.levelTime = timezone.now()
             player.save()
             status = True
             break
