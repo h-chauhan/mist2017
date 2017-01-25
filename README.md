@@ -21,7 +21,7 @@ For more detailed instructions, read this [doc](https://drive.google.com/open?id
 - [x] Create models
 - [x] Create views
 - [x] Testing views
-- [ ] Create templates
+- [x] Create templates
 
 ---
 
@@ -29,5 +29,5 @@ For more detailed instructions, read this [doc](https://drive.google.com/open?id
 - [x] Create models
 - [x] Create views
 - [x] Testing views
-- [ ] Create templates
+- [x] Create templates
 
