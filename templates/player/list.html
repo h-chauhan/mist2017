@@ -103,10 +103,24 @@
                                     <i class="material-icons">chevron_left</i>
                                 </button>
                             {% endif %}
-
+                                  &nbsp;
                             <span class="current">
-                                Page {{ player_list.number }} of {{ player_list.paginator.num_pages }}.
+                                {% if player_list.paginator.num_pages <= 5 %}
+                                    {% for i in player_list.paginator.page_range %}
+                                         {% if i == player_list.number %}
+                                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="location.href='?page={{ i }}';">
+                                             {{i}}
+                                            </button> &nbsp;
+                                         {% else %}
+                                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="location.href='?page={{ i }}';">
+                                             {{i}}
+                                            </button> &nbsp;
+                                         {% endif %}
+
+                                    {% endfor %}
+                                {% endif %}
                             </span> 
+
                             {% if player_list.has_next %}
                                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="location.href='?page={{ player_list.next_page_number }}';">
                                     <i class="material-icons">chevron_right</i>

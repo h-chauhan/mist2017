@@ -21,7 +21,7 @@ def createPlayer(request):
 def playerList(request):
     player = get_object_or_404(Player, user=request.user)
     player_list = Player.objects.order_by('-level', 'levelTime', 'pk')
-    paginator = Paginator(player_list, 5) # Show 25 player per page
+    paginator = Paginator(player_list, 1) # Show 25 player per page
 
     page = request.GET.get('page')
     try:
