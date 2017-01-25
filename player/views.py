@@ -49,7 +49,7 @@ def playerList(request):
         elif player_list.number <= player_list.paginator.num_pages - 2:
             r = range(player_list.number-2, player_list.number+3)
         else:
-            r = range(player_list.number-4, player_list.number+1)
+            r = range(player_list.paginator.num_pages-4, player_list.paginator.num_pages+1)
 
     context = {
         'player': player,

@@ -92,7 +92,7 @@
                 </div>
                 
                 <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
-                    <div class="pagination">
+                    <div class="pagination" style="margin:0 auto">
                         <span class="step-links">
                             {% if player_list.has_previous %}
                                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="location.href='?page=1';">
@@ -104,7 +104,7 @@
                                 </button>
                             {% endif %}
                                   &nbsp;
-                            <span class="current">
+                            <span class="current mdl-cell--hide-phone">
                                {% for i in range %}
                                          {% if i == player_list.number %}
                                             <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="location.href='?page={{ i }}';">
