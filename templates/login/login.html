@@ -103,7 +103,7 @@
                                     <fb:login-button id="login-btn" style="display: none;" max-rows="1" size="large" show-faces="true" 
                                                 auto-logout-link="false" scope="public_profile,user_friends,publish_actions" 
                                                 onlogin="checkLoginState();"> </fb:login-button>
-                                    <a href="{% url "create" %}" id="play-btn" style="display: none; background-color: rgba(62, 68, 89, 0.99);color:whitesmoke" class="btn btn-lg" >Play!</a>
+                                    <button onclick='location.href="{% url "create" %}"' id="play-btn" style="display: none; background-color: rgba(62, 68, 89, 0.99);color:whitesmoke" class="btn btn-lg" >Play!</a>
                                 </div>
                             </div>
                             <!-- /setion main -->
