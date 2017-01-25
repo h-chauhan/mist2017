@@ -20,7 +20,6 @@ def getQuestion(request):
     return render(request, "question/index.html", context)
 
 @login_required
-@csrf_exempt
 def submitAnswer(request):
     player = get_object_or_404(Player, user=request.user)
     ques = get_object_or_404(Question, level=player.level)

@@ -105,7 +105,7 @@
             </div>
         </main>
         <div class="mdl-layout__content mdl-color--white" id="answerwindow">
-            <form autocomplete="off" method="POST" id="answer-form">
+            <form autocomplete="off" method="POST" id="answer-form"> {% csrf_token %}
                 <input autocomplete="false" name="hidden" type="text" style="display:none;">
                 <div class="mdl-grid no-padding">
                     <div class="mdl-cell--11-col mdl-grid mdl-cell--7-col-tablet mdl-cell--3-col-phone no-padding">
@@ -137,6 +137,36 @@
     <script src="{{question.script.url}}"></script>
     {% endif %}
     <script>
+        $(document).ready(function() {
+                // using jQuery
+            function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = jQuery.trim(cookies[i]);
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+            var csrftoken = getCookie('csrftoken');
+            function csrfSafeMethod(method) {
+                // these HTTP methods do not require CSRF protection
+                return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+            }
+            $.ajaxSetup({
+                beforeSend: function(xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                }
+            });
+        });
         $("form#answer-form").submit(function (e) {
             var notification = document.querySelector('.mdl-js-snackbar');
             $.post("/question/answer/", {
