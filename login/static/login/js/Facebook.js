@@ -49,3 +49,4 @@ FB.AppEvents.logPageView();
                     alert("Facebook Login Failed!");
                 }
             });
+    }

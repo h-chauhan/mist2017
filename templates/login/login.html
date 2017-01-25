@@ -141,38 +141,16 @@
     <script src='{% static "login/js/main.js" %}'></script>
     <!-- /script -->
     
-<script>
-    function checkLoginState() {
+
+    
         {% if request.user.is_authenticated %}
-            FB.getLoginStatus(function(response) {
-                if (response.status === 'connected') {
-                    $("#play-btn").show();
-                    $("#login-btn").hide();
-                } else {
-                    $("#play-btn").hide();
-                    $("#login-btn").show();
-                    alert("Facebook Login Failed!");
-                }
-            });
+            <script src='{% static "login/js/face-book.js" %}'>
+            </script>
         {% else %}
-            FB.getLoginStatus(function(response) {
-                if (response.status === 'connected') {
-                    $.post("/rest-auth/facebook/", {
-                        "access_token": response.authResponse.accessToken
-                    }, function(data, status) {       
-                        console.log("Data: " + data.key + "\nStatus: " + status);   
-                    });
-                    $("#play-btn").show();
-                    $("#login-btn").hide();
-                } else {
-                    $("#play-btn").hide();
-                    $("#login-btn").show();
-                    alert("Facebook Login Failed!");
-                }
-            });
+           <script src='{% static "login/js/Facebook.js" %}'>
+            </script>
         {% endif %}
-    }
-</script>
+
 </body>
 
 </html>
