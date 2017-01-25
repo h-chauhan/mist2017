@@ -12,6 +12,8 @@
     top:4.0em;
     bottom:5em;
     overflow:auto;
+    right:0;
+    left:0;
 }
 #answerwindow{
     position:absolute;

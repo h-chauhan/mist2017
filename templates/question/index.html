@@ -44,7 +44,7 @@
         <div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
     </div>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-        <header class="demo-header mdl-layout__header mdl-color--red-800 mdl-color-text--white">
+        <header class="demo-header mdl-layout__header mdl-color--red-a200 mdl-color-text--white">
             <div class="mdl-layout__header-row"> <span class="mdl-layout-title">MIST</span>
                 <div class="mdl-layout-spacer"></div>
                 <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn"> <i class="material-icons">more_vert</i> </button>
@@ -54,14 +54,14 @@
                 </ul>
             </div>
         </header>
-        <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--white">
+        <div class="demo-drawer mdl-layout__drawer mdl-color--grey-900 mdl-color-text--white">
             <header class="demo-drawer-header"> <img src="http://graph.facebook.com/{{social_account.uid}}/picture?height=100" class="demo-avatar">
                 <div class="demo-avatar-dropdown">
                     <h5>{{player.user.first_name }} {{player.user.last_name}}</h5>
                     <div class="mdl-layout-spacer"></div>
                 </div>
             </header>
-            <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800"> 
+            <nav class="demo-navigation mdl-navigation mdl-color--grey-800"> 
                 <a class="mdl-navigation__link active" href="{% url "question" %}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">dashboard</i>Dashboard</a> 
                 <a class="mdl-navigation__link" href="{% url "leaderboard" %}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">format_list_numbered</i>Leaderboard</a> </nav>
         </div>
@@ -79,7 +79,7 @@
                     {% endif %}
                     {% if question.image %}
                     <div class="mdl-card mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col">
-                        <div class="mdl-card__media text-center"> <img src="{{question.image.url}}" style="max-width:100%;"> </div>
+                        <div class="mdl-card__media text-center mdl-color--white"> <img src="{{question.image.url}}" style="width:100%;"> </div>
                     </div>
                     {% endif %}
                     {% if question.video %}
@@ -96,7 +96,7 @@
                     {% endif %}
                 </div>
                 <div class="mdl-cell mdl-cell--4-col mdl-grid">
-                    <div class="mdl-card mdl-color--red-500 mdl-shadow--2dp mdl-cell mdl-cell--12-col" style="height:200px;">
+                    <div class="mdl-card mdl-color--grey-600 mdl-shadow--2dp mdl-cell mdl-cell--12-col" style="height:200px;">
                         <div class="mdl-card__supporting-text mdl-color-text--white">
                             <h4 class="text-center"><i class="material-icons">star</i> Your current rank <i class="material-icons">star</i></h4>
                             <h1 class="text-center">{{rank}}</h1> </div>
