@@ -20,10 +20,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^login/', include('login.urls')),
-    url(r'^player/', include('player.urls')),
-    url(r'^question/', include('question.urls')),
+    url(r'^vanilla/', admin.site.urls),
+    url(r'^$', include('login.urls')),
+    url(r'^leaderboard/', include('player.urls')),
+    url(r'^dashboard/', include('question.urls')),
     url(r'^rest-auth/facebook/$', FacebookLogin.as_view(), name='fb_login')
 ]
 
