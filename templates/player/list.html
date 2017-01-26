@@ -93,7 +93,7 @@
                         </tbody>
                         </table>
                 </div>
-                
+                {% if player_list.paginator.num_pages > 1 %}
                 <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
                     <div class="pagination" style="margin:0 auto">
                         <span class="step-links">
@@ -133,6 +133,7 @@
                         </span>
                     </div>
                 </div>
+                {% endif %}
             </div>
         </main>
     </div>
