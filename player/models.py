@@ -16,3 +16,9 @@ class Player(models.Model):
 
     def __str__(self):
         return self.user.first_name
+
+class Submission(models.Model):
+    player = models.ForeignKey('Player', on_delete=models.CASCADE)
+    question = models.ForeignKey('question.Question', on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    ans = models.CharField(max_length=200)

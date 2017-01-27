@@ -2,7 +2,8 @@ from django.shortcuts import render, HttpResponseRedirect, HttpResponse, reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
-from player.models import Player
+from player.models import *
+from question.models import *
 from django.utils import timezone
 from allauth.socialaccount.models import SocialAccount
 import json
@@ -18,7 +19,7 @@ def createPlayer(request):
     return HttpResponseRedirect(reverse('question'))
 
 @login_required
-def playerList(request):
+def playerList(request):    
     player = get_object_or_404(Player, user=request.user)
     player_list = Player.objects.order_by('-level', 'levelTime', 'pk')
     paginator = Paginator(player_list, 50) # Show 25 player per page
@@ -62,3 +63,12 @@ def playerList(request):
     }
 
     return render(request, 'player/list.html', context)
+
+# @login_required
+@csrf_exempt
+def createSubmission(request):
+    player = Player.objects.get(user=request.user)
+    ques = Question.objects.get(level=player.level)
+    submission = Submission(player=player, question=ques, ans="abc")
+    submission.save()
+    return HttpResponse("True")
