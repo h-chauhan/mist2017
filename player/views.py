@@ -14,7 +14,7 @@ def createPlayer(request):
     try:
         player = Player.objects.get(user=request.user)
     except Player.DoesNotExist:
-        player = Player(level=1, levelTime=timezone.now(), startTime=timezone.now(), user=request.user)
+        player = Player(level=0, levelTime=timezone.now(), startTime=timezone.now(), user=request.user)
         player.save()
     return HttpResponseRedirect(reverse('question'))
 
