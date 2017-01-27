@@ -134,6 +134,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-STATIC_URL = '/opt/mist/static/'
+STATIC_ROOT = '/opt/mist/static/'
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media')
 LOGIN_URL = '/'
