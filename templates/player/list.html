@@ -58,7 +58,19 @@
             </header>
             <nav class="demo-navigation mdl-navigation mdl-color--grey-800"> 
                 <a class="mdl-navigation__link active" href="{% url "question" %}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">dashboard</i>Dashboard</a> 
-                <a class="mdl-navigation__link" href="{% url "leaderboard" %}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">format_list_numbered</i>Leaderboard</a> </nav>
+                <a class="mdl-navigation__link" href="{% url "leaderboard" %}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">format_list_numbered</i>Leaderboard</a>
+                 <!--Left aligned menu below button -->
+                <a class="mdl-navigation__link" id="demo-menu-lower-left">
+                    <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">view_list</i>Levels
+                </a>
+
+                <ul id="level-list" class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                    for="demo-menu-lower-left">
+                    {% for level in level_range %}
+                        <a href='{% url "question_by_level" level %}'><li class="mdl-menu__item">Level {{level}}</li></a>
+                    {% endfor %}
+                </ul>
+            </nav>
         </div>
         <main class="mdl-layout__content mdl-color--grey-300">
             <div class="mdl-grid">

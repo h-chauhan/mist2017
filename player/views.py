@@ -57,7 +57,8 @@ def playerList(request):
         'leaderboard': leaderboard,
         'rank': player.rank(),
         'player_list': player_list,
-        'range': r
+        'range': r,
+        'level_range': range(1, player.level+1),
     }
 
     return render(request, 'player/list.html', context)
