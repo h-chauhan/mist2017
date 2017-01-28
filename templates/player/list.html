@@ -1,5 +1,5 @@
+<!DOCTYPE html>
 {% load static %}
-{% load tz %}
 <!DOCTYPE html>
 <!--[if lt IE 9 ]><html class="ie ie-lt9 no-js" lang="en"><![endif]-->
 <!--[if IE 9 ]><html class="ie ie9 no-js" lang="en"><![endif]-->
@@ -86,7 +86,7 @@
                 <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
                     <h4> &nbsp; Your Current Rank: {{ rank }}</h4>
                 </div>
-                {% timezone "Asia/Kolkata" %}
+
                 <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
                     <table class="mdl-data-table mdl-js-data-table">
                         <thead>
@@ -95,7 +95,7 @@
                             <th class="mdl-data-table__cell--non-numeric">Avatar</th>
                             <th class="mdl-data-table__cell--non-numeric">Name</th>
                             <th>Level</th>
-                            <th class="mdl-data-table__cell--non-numeric">Level Time (IST)</th>
+                            <th class="mdl-data-table__cell--non-numeric">Level Time</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -111,7 +111,6 @@
                         </tbody>
                         </table>
                 </div>
-                {% endtimezone %}
                 {% if player_list.paginator.num_pages > 1 %}
                 <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
                     <div class="pagination" style="margin:0 auto">
