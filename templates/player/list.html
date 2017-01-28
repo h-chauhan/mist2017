@@ -14,7 +14,7 @@
     <meta name="description" content="This event invites scholarly individuals from all around the world to participate in the most spectacular quiz of the year. It is an online event and will be conducted through an online portal.">
     <meta name="keywords" content="mist troika ieee dtu techfest treasure hunt game">
     <meta name="author" content="ieeedtu">
-    <meta property="og:url"                content="http://mist.ieeedtu.com" />
+    <meta property="og:url"                content="http://mist17.ieeedtu.com" />
     <meta property="og:type"               content="article" />
     <meta property="og:title"              content="MIST" />
     <meta property="og:description"        content="Mist is a famous online treasure hunt. " />
@@ -50,8 +50,8 @@
                 <div class="mdl-layout-spacer"></div>
                 <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn"> <i class="material-icons">more_vert</i> </button>
                 <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
-                    <li class="mdl-menu__item">About</li>
-                    <li class="mdl-menu__item">Forum</li>
+                   <a href = "http://troika.ieeedtu.com/events/mist.html" target="_blank"> <li class="mdl-menu__item">About</li></a>
+                   <a href = "https://www.facebook.com/mist.troika/app/202980683107053/" target="_blank"> <li class="mdl-menu__item">Forum</li></a>
                 </ul>
             </div>
         </header>
@@ -120,7 +120,7 @@
                                     <i class="material-icons">first_page</i>
                                 </button>
                                 &nbsp;
-                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="location.href='?page={{ player_list.prev_page_number }}';">
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="location.href='?page={{ player_list.previous_page_number }}';">
                                     <i class="material-icons">chevron_left</i>
                                 </button>
                             {% endif %}
@@ -157,6 +157,16 @@
     </div>
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-91027958-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
 </body>
 
 </html>
