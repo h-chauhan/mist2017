@@ -7,8 +7,10 @@ from question.models import *
 from django.utils import timezone
 from allauth.socialaccount.models import SocialAccount
 import json
+from ratelimit.decorators import ratelimit
 
 # Create your views here.
+@ratelimit(key='ip', rate='10/m')
 @csrf_exempt
 def createPlayer(request):
     try:
@@ -18,6 +20,7 @@ def createPlayer(request):
         player.save()
     return HttpResponseRedirect(reverse('question'))
 
+@ratelimit(key='ip', rate='10/m')
 @login_required
 def playerList(request):    
     player = get_object_or_404(Player, user=request.user)
@@ -65,6 +68,7 @@ def playerList(request):
     return render(request, 'player/list.html', context)
 
 # @login_required
+@ratelimit(key='ip', rate='10/m')
 @csrf_exempt
 def createSubmission(request):
     player = Player.objects.get(user=request.user)
