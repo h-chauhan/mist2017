@@ -16,7 +16,7 @@ def getQuestion(request):
         'player': player,
         'rank': Player.rank(player),
         'social_account': SocialAccount.objects.get(user=player.user),
-        'level_range': range(1, player.level+1),
+        'level_range': range(0, player.level+1),
         'showAnswerWindow': True  
     }
     return render(request, "question/index.html", context)
@@ -33,7 +33,7 @@ def getQuestionByLevel(request, level):
         'player': player,
         'rank': Player.rank(player),
         'social_account': SocialAccount.objects.get(user=player.user),
-        'level_range': range(1, player.level + 1),
+        'level_range': range(0, player.level + 1),
         'showAnswerWindow': True if level == player.level else False
     }
     return render(request, "question/index.html", context)

@@ -59,7 +59,7 @@ def playerList(request):
         'rank': player.rank(),
         'player_list': player_list,
         'range': r,
-        'level_range': range(1, player.level+1),
+        'level_range': range(0, player.level+1),
     }
 
     return render(request, 'player/list.html', context)
@@ -69,6 +69,6 @@ def playerList(request):
 def createSubmission(request):
     player = Player.objects.get(user=request.user)
     ques = Question.objects.get(level=player.level)
-    submission = Submission(player=player, question=ques, ans="abc")
+    submission = Submission(player=player, question=ques, ans=str(request.POST.get('answer')))
     submission.save()
     return HttpResponse("True")
