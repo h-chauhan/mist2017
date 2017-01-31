@@ -9,7 +9,8 @@ class SubmissionInline(admin.TabularInline):
 
 class PlayerAdmin(admin.ModelAdmin):
     inlines = [SubmissionInline]
-    search_fields = ['user.first_name']
+    search_fields = ['user__first_name', 'user__last_name', 'level']
+    list_display = ('user', 'level', 'levelTime')
 
 class SubmissionAdmin(admin.ModelAdmin):
     list_display = ('player', 'question', 'timestamp')

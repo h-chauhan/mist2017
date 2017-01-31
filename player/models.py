@@ -11,7 +11,7 @@ class Player(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL , default = 1)
 
     def rank(player):
-        playerlist = Player.objects.filter(((Q(level__gt=player.level)) | (Q(level=player.level)) & Q(levelTime__lt=player.levelTime)))  
+        playerlist = Player.objects.filter(user__is_staff=False).filter(((Q(level__gt=player.level)) | (Q(level=player.level)) & Q(levelTime__lt=player.levelTime)))  
         return len(playerlist) + 1
 
     def __str__(self):

@@ -5,8 +5,10 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from allauth.socialaccount.models import SocialAccount
 from django.utils import timezone
+from ratelimit.decorators import ratelimit
 
 # Create your views here.
+@ratelimit(key='ip', rate='10/m')
 @login_required
 def getQuestion(request):
     player = get_object_or_404(Player, user=request.user)
@@ -21,6 +23,7 @@ def getQuestion(request):
     }
     return render(request, "question/index.html", context)
 
+@ratelimit(key='ip', rate='10/m')
 @login_required
 def getQuestionByLevel(request, level):
     player = get_object_or_404(Player, user=request.user)
@@ -38,6 +41,7 @@ def getQuestionByLevel(request, level):
     }
     return render(request, "question/index.html", context)
 
+@ratelimit(key='ip', rate='10/m')
 @login_required
 def submitAnswer(request):
     player = get_object_or_404(Player, user=request.user)

@@ -7,8 +7,10 @@ from question.models import *
 from django.utils import timezone
 from allauth.socialaccount.models import SocialAccount
 import json
+from ratelimit.decorators import ratelimit
 
 # Create your views here.
+@ratelimit(key='ip', rate='10/m')
 @csrf_exempt
 def createPlayer(request):
     try:
@@ -18,10 +20,11 @@ def createPlayer(request):
         player.save()
     return HttpResponseRedirect(reverse('question'))
 
+@ratelimit(key='ip', rate='10/m')
 @login_required
 def playerList(request):    
     player = get_object_or_404(Player, user=request.user)
-    player_list = Player.objects.order_by('-level', 'levelTime', 'pk')
+    player_list = Player.objects.order_by('-level', 'levelTime', 'pk').filter(user__is_staff=False)
     paginator = Paginator(player_list, 50) # Show 25 player per page
 
     page = request.GET.get('page')
@@ -64,7 +67,8 @@ def playerList(request):
 
     return render(request, 'player/list.html', context)
 
-# @login_required
+@login_required
+@ratelimit(key='ip', rate='10/m')
 @csrf_exempt
 def createSubmission(request):
     player = Player.objects.get(user=request.user)
