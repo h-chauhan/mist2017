@@ -5,5 +5,6 @@ from player import views
 urlpatterns = [
     url(r'create/', views.createPlayer, name='create'),
     url(r'submission/', views.createSubmission, name='submission'),
+    url(r'player/', views.getPlayer, name='player'),
     url(r'^$', views.playerList, name='leaderboard'),
 ]

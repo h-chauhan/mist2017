@@ -8,6 +8,7 @@ from django.utils import timezone
 from allauth.socialaccount.models import SocialAccount
 import json
 from ratelimit.decorators import ratelimit
+from django.core import serializers
 
 # Create your views here.
 @ratelimit(key='ip', rate='10/m')
@@ -22,7 +23,7 @@ def createPlayer(request):
 
 @ratelimit(key='ip', rate='10/m')
 @login_required
-def playerList(request):    
+def playerList(request):
     player = get_object_or_404(Player, user=request.user)
     player_list = Player.objects.order_by('-level', 'levelTime', 'pk').filter(user__is_staff=False)
     paginator = Paginator(player_list, 50) # Show 25 player per page
@@ -76,3 +77,15 @@ def createSubmission(request):
     submission = Submission(player=player, question=ques, ans=str(request.POST.get('answer')))
     submission.save()
     return HttpResponse("True")
+
+def getPlayer(request):
+    player = get_object_or_404(Player, user__pk = 2)
+    fb = SocialAccount.objects.get(user=player.user)
+    context = {
+        "level": player.level,
+        "name": player.user.first_name + " " + player.user.last_name,
+        "fbid": fb.uid,
+        "rank": player.rank()
+    }
+    jsonResponse = json.dumps(context)
+    return HttpResponse(jsonResponse, content_type="application/json")
